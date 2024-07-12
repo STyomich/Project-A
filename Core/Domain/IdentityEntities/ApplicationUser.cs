@@ -10,10 +10,17 @@ namespace Core.Domain.IdentityEntities
 {
     public class ApplicationUser : IdentityUser
     {
+        public string? Picture { get; set; }
+        public string? Banner { get; set; }
         public string? UserNickname { get; set; }
         public string? UserSurname { get; set; }
         public string? Bio { get; set; }
         public string? Country { get; set; }
-        public UserSetting UserSettings { get; set; }
+        public UserSetting? UserSettings { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
+        public ICollection<CommentReaction>? CommentReactions { get; set; }
+        public ICollection<AnimeReaction>? AnimeReactions { get; set; }
+        public ICollection<Notification>? Notifications { get; set; }
+        public ICollection<FriendRequest>? FriendRequests {get;set;}
     }
 }
