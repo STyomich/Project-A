@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Application.Helpers;
 using Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +22,8 @@ namespace API.Extensions
             {
                 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
             });
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddControllers();
 
             return services;
         }
