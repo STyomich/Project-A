@@ -3,7 +3,7 @@ using Infrastructure.DbContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Services.AnimeService
+namespace Application.Services.AnimeService
 {
     public class List
     {

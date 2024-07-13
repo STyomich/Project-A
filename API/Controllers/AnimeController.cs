@@ -1,5 +1,5 @@
+using Application.Services.AnimeService;
 using Core.Domain.Entities;
-using Core.Services.AnimeService;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

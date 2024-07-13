@@ -2,7 +2,7 @@ using Core.Domain.Entities;
 using Infrastructure.DbContext;
 using MediatR;
 
-namespace Core.Services.AnimeService
+namespace Application.Services.AnimeService
 {
     public class Create
     {
