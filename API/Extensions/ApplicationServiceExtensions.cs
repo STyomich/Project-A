@@ -16,8 +16,14 @@ namespace API.Extensions
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-            services.AddDbContext<DataContext>(opt =>{
+            services.AddDbContext<DataContext>(opt =>
+            {
                 opt.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
             });
 
             return services;
