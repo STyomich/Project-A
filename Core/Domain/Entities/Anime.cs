@@ -27,5 +27,6 @@ namespace Core.Domain.Entities
         public ICollection<AnimePin>? AnimePins { get; set; }
         public ICollection<Notification>? Notifications { get; set; }
         public ICollection<Review>? Reviews { get; set; }
+        public ICollection<EpisodePin>? EpisodePins { get; set; }
     }
 }

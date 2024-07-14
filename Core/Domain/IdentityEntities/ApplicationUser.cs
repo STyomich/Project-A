@@ -23,5 +23,6 @@ namespace Core.Domain.IdentityEntities
         public ICollection<Notification>? Notifications { get; set; }
         public ICollection<FriendRequest>? FriendRequests { get; set; }
         public ICollection<Review>? Reviews { get; set; }
+        public ICollection<EpisodePin>? EpisodePins { get; set; }
     }
 }
