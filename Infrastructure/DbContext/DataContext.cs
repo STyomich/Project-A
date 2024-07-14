@@ -20,7 +20,7 @@ namespace Infrastructure.DbContext
 
         public DbSet<UserSetting> UserSettings { get; set; }
         public DbSet<Anime> Animes { get; set; }
-        public DbSet<AnimeReaction> AnimeReactions { get; set; }
+        public DbSet<AnimePin> AnimePins { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<GenrePin> GenrePins { get; set; }
         public DbSet<Episode> Episodes { get; set; }
@@ -82,14 +82,15 @@ namespace Infrastructure.DbContext
                 .WithMany(u => u.CommentReactions)
                 .HasForeignKey(cr => cr.UserId);
 
-            builder.Entity<AnimeReaction>()
-                .HasOne(ar => ar.Anime)
-                .WithMany(a => a.AnimeReactions)
-                .HasForeignKey(ar => ar.AnimeId);
-            builder.Entity<AnimeReaction>()
-                .HasOne(ar => ar.User)
-                .WithMany(u => u.AnimeReactions)
-                .HasForeignKey(ar => ar.UserId);
+            builder.Entity<AnimePin>(x => x.HasKey(ap => new { ap.UserId, ap.AnimeId }));
+            builder.Entity<AnimePin>()
+                .HasOne(ap => ap.Anime)
+                .WithMany(a => a.AnimePins)
+                .HasForeignKey(ap => ap.AnimeId);
+            builder.Entity<AnimePin>()
+                .HasOne(ap => ap.User)
+                .WithMany(u => u.AnimePins)
+                .HasForeignKey(ap => ap.UserId);
 
             builder.Entity<Notification>()
                 .HasOne(n => n.User)

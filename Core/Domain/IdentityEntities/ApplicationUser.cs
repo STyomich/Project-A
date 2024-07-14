@@ -19,7 +19,7 @@ namespace Core.Domain.IdentityEntities
         public UserSetting? UserSettings { get; set; }
         public ICollection<Comment>? Comments { get; set; }
         public ICollection<CommentReaction>? CommentReactions { get; set; }
-        public ICollection<AnimeReaction>? AnimeReactions { get; set; }
+        public ICollection<AnimePin>? AnimePins { get; set; }
         public ICollection<Notification>? Notifications { get; set; }
         public ICollection<FriendRequest>? FriendRequests {get;set;}
     }
