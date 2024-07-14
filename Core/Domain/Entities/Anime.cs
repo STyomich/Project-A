@@ -20,11 +20,12 @@ namespace Core.Domain.Entities
         public string Description { get; set; } = "No information";
         public string? AdminsNote { get; set; }
         public Studio? Studio { get; set; }
-        public ChronologyElement? ChronologyElement {get;set;}
+        public ChronologyElement? ChronologyElement { get; set; }
         public ICollection<GenrePin>? GenrePins { get; set; }
         public ICollection<Episode>? Episodes { get; set; }
         public ICollection<Comment>? Comments { get; set; }
         public ICollection<AnimePin>? AnimePins { get; set; }
         public ICollection<Notification>? Notifications { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
     }
 }

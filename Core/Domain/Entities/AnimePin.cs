@@ -14,7 +14,7 @@ namespace Core.Domain.Entities
         public string PinType { get; set; } = AnimePinTypeEnum.Watching.ToString(); //AnimePinTypeEnum
         public int? Grade { get; set; } //1-10
         public bool isFavorite { get; set; } = false;
-        public ApplicationUser? User {get;set;}
-        public Anime? Anime {get;set;}
+        public ApplicationUser? User { get; set; }
+        public Anime? Anime { get; set; }
     }
 }

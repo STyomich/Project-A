@@ -31,6 +31,7 @@ namespace Infrastructure.DbContext
         public DbSet<Chronology> Chronologies { get; set; }
         public DbSet<ChronologyElement> ChronologyElements { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -72,7 +73,7 @@ namespace Infrastructure.DbContext
                 .WithMany(u => u.Comments)
                 .HasForeignKey(c => c.UserId);
 
-            //builder.Entity<CommentReaction>(x => x.HasKey(gp => new { gp.UserId, gp.CommentId }));
+            builder.Entity<CommentReaction>(x => x.HasKey(gp => new { gp.UserId, gp.CommentId }));
             builder.Entity<CommentReaction>()
                 .HasOne(cr => cr.Comment)
                 .WithMany(c => c.CommentReactions)
@@ -124,6 +125,15 @@ namespace Infrastructure.DbContext
                 .HasOne(fr => fr.SecondUser)
                 .WithMany(u => u.FriendRequests)
                 .HasForeignKey(fr => fr.SecondUserId);
+            
+            builder.Entity<Review>()
+                .HasOne(r => r.Anime)
+                .WithMany(a => a.Reviews)
+                .HasForeignKey(r => r.AnimeId);
+            builder.Entity<Review>()
+                .HasOne(r => r.User)
+                .WithMany(u => u.Reviews)
+                .HasForeignKey(r => r.UserId);
         }
     }
 }
