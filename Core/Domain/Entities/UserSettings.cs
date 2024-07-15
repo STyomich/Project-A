@@ -10,7 +10,7 @@ namespace Core.Domain.Entities
     public class UserSetting
     {
         public Guid Id { get; set; }
-        public string? UserId { get; set; }
+        public Guid UserId { get; set; }
         public ApplicationUser? User { get; set; }
         public bool ProfileIsPublic { get; set; } = true;
         public bool WatchingIsPublic { get; set; } = true;

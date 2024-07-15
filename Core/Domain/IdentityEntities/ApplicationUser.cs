@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Core.Domain.IdentityEntities
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<Guid>
     {
         public string? Picture { get; set; }
         public string? Banner { get; set; }
@@ -21,7 +21,8 @@ namespace Core.Domain.IdentityEntities
         public ICollection<CommentReaction>? CommentReactions { get; set; }
         public ICollection<AnimePin>? AnimePins { get; set; }
         public ICollection<Notification>? Notifications { get; set; }
-        public ICollection<FriendRequest>? FriendRequests { get; set; }
+        public ICollection<FriendRequest>? SendFriendRequests { get; set; }
+        public ICollection<FriendRequest>? ReceivedFriendRequests { get; set; }
         public ICollection<Review>? Reviews { get; set; }
         public ICollection<EpisodePin>? EpisodePins { get; set; }
     }

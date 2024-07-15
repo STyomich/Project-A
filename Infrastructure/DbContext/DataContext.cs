@@ -5,13 +5,14 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Core.Domain.Entities;
 using Core.Domain.IdentityEntities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace Infrastructure.DbContext
 {
-    public class DataContext : IdentityDbContext<ApplicationUser>
+    public class DataContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public DataContext(DbContextOptions options) : base(options)
         {
@@ -32,6 +33,7 @@ namespace Infrastructure.DbContext
         public DbSet<ChronologyElement> ChronologyElements { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<EpisodePin> EpisodePins {get;set;}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -88,7 +90,7 @@ namespace Infrastructure.DbContext
                 .HasOne(cr => cr.User)
                 .WithMany(u => u.CommentReactions)
                 .HasForeignKey(cr => cr.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<AnimePin>(x => x.HasKey(ap => new { ap.UserId, ap.AnimeId }));
             builder.Entity<AnimePin>()
@@ -133,14 +135,14 @@ namespace Infrastructure.DbContext
             builder.Entity<FriendRequest>(x => x.HasKey(fr => new { fr.FirstUserId, fr.SecondUserId }));
             builder.Entity<FriendRequest>()
                 .HasOne(fr => fr.FirstUser)
-                .WithMany(u => u.FriendRequests)
+                .WithMany(u => u.SendFriendRequests)
                 .HasForeignKey(fr => fr.FirstUserId)
                 .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<FriendRequest>()
                 .HasOne(fr => fr.SecondUser)
-                .WithMany(u => u.FriendRequests)
+                .WithMany(u => u.ReceivedFriendRequests)
                 .HasForeignKey(fr => fr.SecondUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Review>()
                 .HasOne(r => r.Anime)

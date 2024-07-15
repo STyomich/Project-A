@@ -17,7 +17,7 @@ namespace Application.Services.AnimeService
             }
             public async Task<List<Anime>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _dataContext.Animes.ToListAsync();
+                return await _dataContext.Animes.Include(a => a.Comments).Include(a => a.Episodes).ToListAsync();
             }
         }
     }

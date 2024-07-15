@@ -1,4 +1,5 @@
 using Application.Helpers;
+using Application.Services.AnimeService;
 using Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +21,7 @@ namespace API.Extensions
 
             services.AddMediatR(cfg =>
             {
-                cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(List).Assembly);
             });
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddControllers();

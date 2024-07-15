@@ -22,11 +22,17 @@ namespace API.Controllers
         {
             return Ok(await Mediator.Send(new Create.Command { Anime = anime }));
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAnimeDetails(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new Details.Query {Id = id}));
+        }
         [HttpPut("{id}")]
         public async Task<IActionResult> EditAnime(Guid Id, Anime anime)
         {
             anime.Id = Id;
             return Ok(await Mediator.Send(new Edit.Command { Anime = anime }));
         }
+        
     }
 }
