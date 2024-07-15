@@ -3,21 +3,23 @@ using Infrastructure.DbContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Services.AnimeService
+namespace Application.Services.StudioService
 {
     public class List
     {
-        public class Query : IRequest<List<Anime>> { }
-        public class Handler : IRequestHandler<Query, List<Anime>>
+        public class Query : IRequest<List<Studio>> { }
+        public class Handler : IRequestHandler<Query, List<Studio>>
         {
             private readonly DataContext _dataContext;
+
             public Handler(DataContext dataContext)
             {
                 _dataContext = dataContext;
             }
-            public async Task<List<Anime>> Handle(Query request, CancellationToken cancellationToken)
+
+            public async Task<List<Studio>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _dataContext.Animes.Include(a => a.Studio).ToListAsync();
+                return await _dataContext.Studios.ToListAsync();
             }
         }
     }

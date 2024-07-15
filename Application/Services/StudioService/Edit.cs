@@ -3,13 +3,13 @@ using Core.Domain.Entities;
 using Infrastructure.DbContext;
 using MediatR;
 
-namespace Application.Services.AnimeService
+namespace Application.Services.StudioService
 {
     public class Edit
     {
         public class Command : IRequest<Result<Unit>>
         {
-            public Anime? Anime { get; set; }
+            public Studio? Studio { get; set; }
         }
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
@@ -20,15 +20,15 @@ namespace Application.Services.AnimeService
                 _dataContext = dataContext;
                 _mapper = mapper;
             }
+
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var anime = await _dataContext.Animes.FindAsync(request.Anime.Id);
-                if (anime == null) return null;
-
-                _mapper.Map(request.Anime, anime);
+                var studio = await _dataContext.Studios.FindAsync(request.Studio.Id);
+                if(studio == null) return null;
+                _mapper.Map(request.Studio, studio);
 
                 var result = await _dataContext.SaveChangesAsync() > 0;
-                if (!result) return Result<Unit>.Failure("Failed to update anime.");
+                if (!result) return Result<Unit>.Failure("Failed to update studio.");
                 return Result<Unit>.Success(Unit.Value);
             }
         }

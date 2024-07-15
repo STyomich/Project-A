@@ -8,6 +8,7 @@ namespace Application.Helpers
         public MappingProfiles()
         {
             CreateMap<Anime, Anime>();
+            CreateMap<Studio, Studio>();
         }
     }
 }

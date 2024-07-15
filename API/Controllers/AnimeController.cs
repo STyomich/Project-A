@@ -28,10 +28,10 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query {Id = id}));
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditAnime(Guid Id, Anime anime)
+        public async Task<IActionResult> EditAnime(Guid id, Anime anime)
         {
-            anime.Id = Id;
-            return Ok(await Mediator.Send(new Edit.Command { Anime = anime }));
+            anime.Id = id;
+            return HandleResult(await Mediator.Send(new Edit.Command { Anime = anime }));
         }
         
     }
