@@ -8,8 +8,10 @@ namespace Core.Domain.Entities
         public Guid Id { get; set; }
         public Guid StudioId { get; set; }
         public string? Picture { get; set; }
-        public string? Title { get; set; }
+        public string? TitleInEnglish { get; set; }
         public string? TitleInJapanese { get; set; }
+        public string? TitleInUkrainian { get; set; }
+        public string? TitleInRussian { get; set; }
         public string Type { get; set; } = TypeOfAnimeEnum.Undefined.ToString();
         public string? AnimeState { get; set; } = AnimeStateEnum.Undefined.ToString();
         public DateTime StartDate { get; set; }

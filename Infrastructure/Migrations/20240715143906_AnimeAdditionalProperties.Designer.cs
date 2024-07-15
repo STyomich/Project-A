@@ -4,6 +4,7 @@ using Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240715143906_AnimeAdditionalProperties")]
+    partial class AnimeAdditionalProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,16 +63,16 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("StudioId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("TitleInEnglish")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("TitleInJapanese")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TitleInRussian")
+                    b.Property<string>("TitleOnEnglish")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TitleInUkrainian")
+                    b.Property<string>("TitleOnRussian")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleOnUkrainian")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
