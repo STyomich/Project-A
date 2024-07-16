@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Entities;
 
-namespace Core.DTO
+namespace Core.DTO.Identity
 {
     public class UserDto
     {
