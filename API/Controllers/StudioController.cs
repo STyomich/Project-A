@@ -1,5 +1,6 @@
 using Application.Services.StudioService;
 using Core.Domain.Entities;
+using Core.DTO.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,7 @@ namespace API.Controllers
             _mediator = mediator;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Studio>>> GetAllStudios()
+        public async Task<ActionResult<List<StudioDto>>> GetAllStudios()
         {
             return await _mediator.Send(new List.Query());
         }
@@ -25,13 +26,18 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStudioDetails(Guid id)
         {
-            return HandleResult(await Mediator.Send(new Details.Query {Id = id}));
+            return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> EditStudio(Guid id, Studio studio)
         {
             studio.Id = id;
-            return HandleResult(await Mediator.Send(new Edit.Command{ Studio = studio}));
+            return HandleResult(await Mediator.Send(new Edit.Command { Studio = studio }));
+        }
+        [HttpGet("{id}/animes")]
+        public async Task<ActionResult<List<AnimeDto>>> GetAnimesCreatedByStudio(Guid id)
+        {
+            return await _mediator.Send(new Animes.Query { StudioId = id });
         }
     }
 }

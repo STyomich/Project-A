@@ -1,5 +1,6 @@
 using Application.Services.AnimeService;
 using Core.Domain.Entities;
+using Core.DTO.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,7 @@ namespace API.Controllers
             _mediator = mediator;
         }
         [HttpGet] //api/anime
-        public async Task<ActionResult<List<Anime>>> GetAllAnime()
+        public async Task<ActionResult<List<AnimeDto>>> GetAllAnime()
         {
             return await _mediator.Send(new List.Query());
         }

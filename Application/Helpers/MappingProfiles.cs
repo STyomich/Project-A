@@ -1,5 +1,6 @@
 using AutoMapper;
 using Core.Domain.Entities;
+using Core.DTO.Entities;
 
 namespace Application.Helpers
 {
@@ -8,7 +9,10 @@ namespace Application.Helpers
         public MappingProfiles()
         {
             CreateMap<Anime, Anime>();
+            CreateMap<Anime, AnimeDto>();
+
             CreateMap<Studio, Studio>();
+            CreateMap<Studio, StudioDto>();
         }
     }
 }
