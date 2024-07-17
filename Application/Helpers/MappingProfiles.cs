@@ -16,6 +16,8 @@ namespace Application.Helpers
 
             CreateMap<VoiceCast, VoiceCast>();
             CreateMap<VoiceCast, VoiceCastDto>();
+            CreateMap<VoiceCastPin, VoiceCastPin>();
+            CreateMap<VoiceCastPin, VoiceCastPinDto>();
 
             CreateMap<Episode, Episode>();
             CreateMap<Episode, EpisodeDto>();

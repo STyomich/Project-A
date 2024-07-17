@@ -1,5 +1,4 @@
 using AutoMapper;
-using Core.Domain.Entities;
 using Core.DTO.Entities;
 using Infrastructure.DbContext;
 using MediatR;
@@ -11,7 +10,7 @@ namespace Application.Services.StudioService
     {
         public class Query : IRequest<Result<StudioDto>>
         {
-            public Guid Id {get;set;}
+            public Guid Id { get; set; }
         }
         public class Handler : IRequestHandler<Query, Result<StudioDto>>
         {

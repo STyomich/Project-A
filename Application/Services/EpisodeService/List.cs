@@ -21,7 +21,7 @@ namespace Application.Services.EpisodeService
 
             public async Task<List<EpisodeDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return _mapper.Map<List<EpisodeDto>>(await _dataContext.Episodes.ToListAsync());
+                return _mapper.Map<List<EpisodeDto>>(await _dataContext.Episodes.Include(e => e.VoiceCastPins).ThenInclude(vcp => vcp.VoiceCast).ToListAsync());
             }
         }
     }

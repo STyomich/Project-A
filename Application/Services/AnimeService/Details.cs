@@ -21,7 +21,7 @@ namespace Application.Services.AnimeService
             }
             public async Task<Result<Anime>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var anime = await _dataContext.Animes.Where(a => a.Id == request.Id).Include(a => a.Studio).Include(a => a.Comments).FirstOrDefaultAsync();
+                var anime = await _dataContext.Animes.Where(a => a.Id == request.Id).Include(a => a.Studio).Include(a => a.Episodes).FirstOrDefaultAsync();
                 if (anime != null)
                     return Result<Anime>.Success(anime);
                 else

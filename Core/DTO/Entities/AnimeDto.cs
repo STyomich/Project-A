@@ -22,5 +22,6 @@ namespace Core.DTO.Entities
         public string Description { get; set; } = "No information";
         public string? AdminsNote { get; set; }
         public StudioDto? Studio { get; set; }
+        public ICollection<EpisodeDto>? Episodes { get; set; }
     }
 }

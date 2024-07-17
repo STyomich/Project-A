@@ -35,5 +35,10 @@ namespace API.Controllers
             voiceCast.Id = id;
             return HandleResult(await Mediator.Send(new Edit.Command { VoiceCast = voiceCast }));
         }
+        [HttpPost("add-episode")]
+        public async Task<IActionResult> AddVoiceCastToEpisode(VoiceCastPin voiceCastPin)
+        {
+            return HandleResult(await Mediator.Send(new AddEpisode.Command {VoiceCastPin = voiceCastPin}));
+        }
     }
 }

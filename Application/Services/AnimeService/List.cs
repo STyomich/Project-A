@@ -21,7 +21,7 @@ namespace Application.Services.AnimeService
             }
             public async Task<List<AnimeDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var animes = await _dataContext.Animes.Include(a => a.Studio).ToListAsync();
+                var animes = await _dataContext.Animes.Include(a => a.Studio).Include(a => a.Episodes).ThenInclude(a => a.VoiceCastPins).ThenInclude(vcp => vcp.VoiceCast).ToListAsync();
                 return _mapper.Map<List<AnimeDto>>(animes);
             }
         }
