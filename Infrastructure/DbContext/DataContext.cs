@@ -35,6 +35,7 @@ namespace Infrastructure.DbContext
         public DbSet<Review> Reviews { get; set; }
         public DbSet<EpisodePin> EpisodePins { get; set; }
         public DbSet<VoiceCast> VoiceCasts { get; set; }
+        public DbSet<VoiceCastPin> VoiceCastPins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -67,11 +68,6 @@ namespace Infrastructure.DbContext
                 .HasOne(e => e.Anime)
                 .WithMany(a => a.Episodes)
                 .HasForeignKey(e => e.AnimeId)
-                .OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<Episode>()
-                .HasOne(e => e.VoiceCast)
-                .WithMany(a => a.Episodes)
-                .HasForeignKey(e => e.VoiceCastId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             //builder.Entity<Comment>(x => x.HasKey(gp => new { gp.AnimeId, gp.UserId }));
@@ -172,6 +168,16 @@ namespace Infrastructure.DbContext
                 .WithMany(a => a.EpisodePins)
                 .HasForeignKey(ep => ep.AnimeId)
                 .OnDelete(DeleteBehavior.Cascade);
+            
+            builder.Entity<VoiceCastPin>(x => x.HasKey(vcp => new { vcp.EpisodeId, vcp.VoiceCastId}));
+            builder.Entity<VoiceCastPin>()
+                .HasOne(vcp => vcp.Episode)
+                .WithMany(e => e.VoiceCastPins)
+                .HasForeignKey(vcp => vcp.EpisodeId);
+            builder.Entity<VoiceCastPin>()
+                .HasOne(vcp => vcp.VoiceCast)
+                .WithMany(vc => vc.VoiceCastPins)
+                .HasForeignKey(vcp => vcp.VoiceCastId);
         }
     }
 }

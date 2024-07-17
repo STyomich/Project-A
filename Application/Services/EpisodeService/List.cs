@@ -4,12 +4,12 @@ using Infrastructure.DbContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Services.StudioService
+namespace Application.Services.EpisodeService
 {
     public class List
     {
-        public class Query : IRequest<List<StudioDto>> { }
-        public class Handler : IRequestHandler<Query, List<StudioDto>>
+        public class Query : IRequest<List<EpisodeDto>> { }
+        public class Handler : IRequestHandler<Query, List<EpisodeDto>>
         {
             private readonly DataContext _dataContext;
             private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace Application.Services.StudioService
                 _mapper = mapper;
             }
 
-            public async Task<List<StudioDto>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<EpisodeDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return _mapper.Map<List<StudioDto>>(await _dataContext.Studios.ToListAsync());
+                return _mapper.Map<List<EpisodeDto>>(await _dataContext.Episodes.ToListAsync());
             }
         }
     }

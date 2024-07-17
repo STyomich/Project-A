@@ -13,6 +13,12 @@ namespace Application.Helpers
 
             CreateMap<Studio, Studio>();
             CreateMap<Studio, StudioDto>();
+
+            CreateMap<VoiceCast, VoiceCast>();
+            CreateMap<VoiceCast, VoiceCastDto>();
+
+            CreateMap<Episode, Episode>();
+            CreateMap<Episode, EpisodeDto>();
         }
     }
 }
