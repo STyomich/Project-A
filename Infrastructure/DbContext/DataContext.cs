@@ -33,7 +33,8 @@ namespace Infrastructure.DbContext
         public DbSet<ChronologyElement> ChronologyElements { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<EpisodePin> EpisodePins {get;set;}
+        public DbSet<EpisodePin> EpisodePins { get; set; }
+        public DbSet<VoiceCast> VoiceCasts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -66,6 +67,11 @@ namespace Infrastructure.DbContext
                 .HasOne(e => e.Anime)
                 .WithMany(a => a.Episodes)
                 .HasForeignKey(e => e.AnimeId)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Episode>()
+                .HasOne(e => e.VoiceCast)
+                .WithMany(a => a.Episodes)
+                .HasForeignKey(e => e.VoiceCastId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             //builder.Entity<Comment>(x => x.HasKey(gp => new { gp.AnimeId, gp.UserId }));
