@@ -21,6 +21,10 @@ namespace Application.Helpers
 
             CreateMap<Episode, Episode>();
             CreateMap<Episode, EpisodeDto>();
+
+            CreateMap<UserSetting, UserSetting>();
+            CreateMap<UserSetting, UserSettingDto>();
+            CreateMap<UserSettingDto, UserSetting>();
         }
     }
 }

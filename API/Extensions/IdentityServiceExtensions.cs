@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Core.Domain.IdentityEntities;
+using Infrastructure.DbContext;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Extensions
 {
@@ -9,7 +8,13 @@ namespace API.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
-            
+            services.AddIdentityCore<ApplicationUser>(opt =>
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<DataContext>();
+
             return services;
         }
     }

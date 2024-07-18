@@ -1,6 +1,10 @@
-
+using Application.Services.UserSettingService;
+using AutoMapper;
+using Core.Domain.Entities;
 using Core.Domain.IdentityEntities;
+using Core.DTO.Entities;
 using Core.DTO.Identity;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +14,14 @@ namespace API.Controllers
 {
     public class UserController : BaseApiController
     {
-        private readonly UserManager<ApplicationUser>? _userManager;
-        public UserController(UserManager<ApplicationUser>? userManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+        public UserController(UserManager<ApplicationUser> userManager, IMediator mediator, IMapper mapper)
         {
-            userManager = _userManager;
+            _userManager = userManager;
+            _mediator = mediator;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -36,7 +44,7 @@ namespace API.Controllers
                     Email = user.Email,
                     Bio = user.Bio,
                     Country = user.Country,
-                    UserSettings = user.UserSettings
+                    UserSettings = _mapper.Map<UserSettingDto>(user.UserSettings)
                 };
             }
             return Unauthorized();
@@ -60,23 +68,31 @@ namespace API.Controllers
             {
                 UserNickname = registerDto.UserNickname,
                 Email = registerDto.Email,
+                UserName = registerDto.UserName,
+                Id = Guid.NewGuid()
             };
-
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (result.Succeeded)
             {
-                //To Do: Add creating of UserSettings.
+                //TODO: Do functionality of creating User Settings.
+                var userSetting = new UserSetting
+                {
+                    UserId = user.Id
+                };
+                await _mediator.Send(new Create.Command { UserSetting = userSetting });
+                user.UserSettings = userSetting;
                 return new UserDto
                 {
                     Picture = user.Picture,
                     Banner = user.Banner,
                     UserNickname = user.UserNickname,
+                    UserName = user.UserName,
                     UserSurname = user.UserSurname,
                     Email = user.Email,
                     Bio = user.Bio,
                     Country = user.Country,
-                    UserSettings = user.UserSettings
+                    UserSettings = _mapper.Map<UserSettingDto>(user.UserSettings)
                 };
             }
 
