@@ -1,3 +1,4 @@
+using Application.Services.UserService;
 using Core.Domain.IdentityEntities;
 using Infrastructure.DbContext;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,8 @@ namespace API.Extensions
                 opt.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<DataContext>();
+
+            services.AddScoped<TokenService>();
 
             return services;
         }

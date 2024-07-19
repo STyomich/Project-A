@@ -12,6 +12,7 @@ namespace Core.DTO.Identity
         public string? Email { get; set; }
         public string? Bio { get; set; }
         public string? Country { get; set; }
+        public string? Token { get; set; }
         public UserSettingDto? UserSettings { get; set; }
     }
 }

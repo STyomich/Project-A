@@ -1,3 +1,4 @@
+using Application.Services.UserService;
 using Application.Services.UserSettingService;
 using AutoMapper;
 using Core.Domain.Entities;
@@ -17,11 +18,13 @@ namespace API.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        public UserController(UserManager<ApplicationUser> userManager, IMediator mediator, IMapper mapper)
+        private readonly TokenService _tokenService;
+        public UserController(UserManager<ApplicationUser> userManager, IMediator mediator, IMapper mapper, TokenService tokenService)
         {
             _userManager = userManager;
             _mediator = mediator;
             _mapper = mapper;
+            _tokenService = tokenService;
         }
 
         [AllowAnonymous]
@@ -44,6 +47,7 @@ namespace API.Controllers
                     Email = user.Email,
                     Bio = user.Bio,
                     Country = user.Country,
+                    Token = _tokenService.CreateToken(user),
                     UserSettings = _mapper.Map<UserSettingDto>(user.UserSettings)
                 };
             }
@@ -92,6 +96,7 @@ namespace API.Controllers
                     Email = user.Email,
                     Bio = user.Bio,
                     Country = user.Country,
+                    Token = _tokenService.CreateToken(user),
                     UserSettings = _mapper.Map<UserSettingDto>(user.UserSettings)
                 };
             }
