@@ -1,6 +1,8 @@
 using Application.Helpers;
 using Application.Services.AnimeService;
 using Infrastructure.DbContext;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -24,7 +26,10 @@ namespace API.Extensions
                 cfg.RegisterServicesFromAssembly(typeof(List).Assembly);
             });
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-            services.AddControllers();
+            services.AddControllers(opt => {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            });
 
             return services;
         }
