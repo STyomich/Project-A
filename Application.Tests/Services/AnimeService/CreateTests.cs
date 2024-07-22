@@ -11,7 +11,7 @@ namespace Application.Tests.Services.AnimeService
 {
     public class CreateTests
     {
-        private static async Task<DataContext> GetDbContext()
+        private static DataContext GetDbContext()
         {
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -43,7 +43,7 @@ namespace Application.Tests.Services.AnimeService
                 Description = "Short desc.",
                 AdminsNote = "Admins test note.",
             };
-            var dataContext = await GetDbContext();
+            var dataContext = GetDbContext();
 
             //Act
             var createCommand = new Create.Command
@@ -80,7 +80,118 @@ namespace Application.Tests.Services.AnimeService
                 Description = "Short desc.",
                 AdminsNote = "Admins test note.",
             };
-            var dataContext = await GetDbContext();
+            var dataContext = GetDbContext();
+
+            //Act
+            var createCommand = new Create.Command
+            {
+                Anime = anime
+            };
+
+            var handler = new Create.Handler(dataContext);
+
+            var result = await handler.Handle(createCommand, CancellationToken.None);
+
+            //Assert
+            result.Should().BeEquivalentTo(Result<Unit>.Failure("Failed to create an anime."));
+        }
+        [Fact]
+        public async void Create_CreateAnimeWhereTypeIsNonEnumEquivalent_ReturnsFailure()
+        {
+            //Arrange
+            var anime = new Anime
+            {
+                StudioId = Guid.NewGuid(),
+                Picture = "pictureLink",
+                TitleInEnglish = "Title in English",
+                TitleInJapanese = "Title in Japanese",
+                TitleInUkrainian = "Title in Ukrainian",
+                TitleInRussian = "Title in Russian",
+                Type = "Some type of anime. Test type. Be happy.",
+                AnimeState = AnimeStateEnum.Undefined.ToString(),
+                StartDate = DateTime.UtcNow.AddDays(1),
+                EndDate = DateTime.UtcNow,
+                ReleasedEpisodes = 1,
+                ExpectedEpisodes = 24,
+                OriginalSource = OriginalSourceEnum.Undefined.ToString(),
+                Description = "Short desc.",
+                AdminsNote = "Admins test note.",
+            };
+            var dataContext = GetDbContext();
+
+            //Act
+            var createCommand = new Create.Command
+            {
+                Anime = anime
+            };
+
+            var handler = new Create.Handler(dataContext);
+
+            var result = await handler.Handle(createCommand, CancellationToken.None);
+
+            //Assert
+            result.Should().BeEquivalentTo(Result<Unit>.Failure("Failed to create an anime."));
+        }
+        [Fact]
+        public async void Create_CreateAnimeWhereAnimeStateIsNonEnumEquivalent_ReturnsFailure()
+        {
+            //Arrange
+            var anime = new Anime
+            {
+                StudioId = Guid.NewGuid(),
+                Picture = "pictureLink",
+                TitleInEnglish = "Title in English",
+                TitleInJapanese = "Title in Japanese",
+                TitleInUkrainian = "Title in Ukrainian",
+                TitleInRussian = "Title in Russian",
+                Type = TypeOfAnimeEnum.Undefined.ToString(),
+                AnimeState = "Anime state. Don't worry",
+                StartDate = DateTime.UtcNow.AddDays(1),
+                EndDate = DateTime.UtcNow,
+                ReleasedEpisodes = 1,
+                ExpectedEpisodes = 24,
+                OriginalSource = OriginalSourceEnum.Undefined.ToString(),
+                Description = "Short desc.",
+                AdminsNote = "Admins test note.",
+            };
+            var dataContext = GetDbContext();
+
+            //Act
+            var createCommand = new Create.Command
+            {
+                Anime = anime
+            };
+
+            var handler = new Create.Handler(dataContext);
+
+            var result = await handler.Handle(createCommand, CancellationToken.None);
+
+            //Assert
+            result.Should().BeEquivalentTo(Result<Unit>.Failure("Failed to create an anime."));
+        }
+        [Fact]
+        public async void Create_CreateAnimeWhereOriginalSourceIsNonEnumEquivalent_ReturnsFailure()
+        {
+            //Arrange
+            var anime = new Anime
+            {
+                StudioId = Guid.NewGuid(),
+                Picture = "pictureLink",
+                TitleInEnglish = "Title in English",
+                TitleInJapanese = "Title in Japanese",
+                TitleInUkrainian = "Title in Ukrainian",
+                TitleInRussian = "Title in Russian",
+                Type = TypeOfAnimeEnum.Undefined.ToString(),
+                AnimeState = AnimeStateEnum.Undefined.ToString(),
+                StartDate = DateTime.UtcNow.AddDays(1),
+                EndDate = DateTime.UtcNow,
+                ReleasedEpisodes = 1,
+                ExpectedEpisodes = 24,
+                OriginalSource = "We are don't know about original source. We don't like anime.",
+                Description = "Short desc.",
+                AdminsNote = "Admins test note.",
+            };
+            var dataContext = GetDbContext();
 
             //Act
             var createCommand = new Create.Command

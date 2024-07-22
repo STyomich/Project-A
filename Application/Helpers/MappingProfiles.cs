@@ -9,7 +9,8 @@ namespace Application.Helpers
         public MappingProfiles()
         {
             CreateMap<Anime, Anime>();
-            CreateMap<Anime, AnimeDto>();
+            CreateMap<Anime, AnimeDto>()
+                .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.GenrePins.Select(gp => gp.Genre)));
 
             CreateMap<Studio, Studio>();
             CreateMap<Studio, StudioDto>();
@@ -25,6 +26,9 @@ namespace Application.Helpers
             CreateMap<UserSetting, UserSetting>();
             CreateMap<UserSetting, UserSettingDto>();
             CreateMap<UserSettingDto, UserSetting>();
+
+            CreateMap<Genre, Genre>();
+            CreateMap<Genre, GenreDto>();
         }
     }
 }
