@@ -43,6 +43,7 @@ namespace API.Controllers
                     Picture = user.Picture,
                     Banner = user.Banner,
                     UserNickname = user.UserNickname,
+                    UserName = user.UserName,
                     UserSurname = user.UserSurname,
                     Email = user.Email,
                     Bio = user.Bio,

@@ -18,7 +18,8 @@ namespace Application.Services.UserService
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserNickname),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim("UserNickname", user.UserNickname),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email)
             };
