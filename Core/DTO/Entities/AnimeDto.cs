@@ -24,5 +24,6 @@ namespace Core.DTO.Entities
         public StudioDto? Studio { get; set; }
         public ICollection<EpisodeDto>? Episodes { get; set; }
         public ICollection<GenreDto>? Genres { get; set; }
+        public ICollection<CommentDto>? Comments { get; set; }
     }
 }

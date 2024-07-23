@@ -1,4 +1,5 @@
 using Application.Helpers;
+using Application.Interfaces;
 using Application.Services.AnimeService;
 using Infrastructure.DbContext;
 using Microsoft.AspNetCore.Authorization;
@@ -30,6 +31,8 @@ namespace API.Extensions
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
             });
+            services.AddHttpContextAccessor();
+            services.AddScoped<IUserAccessor, UserAccessor>();
 
             return services;
         }

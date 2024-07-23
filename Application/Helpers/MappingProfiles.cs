@@ -1,6 +1,8 @@
 using AutoMapper;
 using Core.Domain.Entities;
+using Core.Domain.IdentityEntities;
 using Core.DTO.Entities;
+using Core.DTO.Identity;
 
 namespace Application.Helpers
 {
@@ -29,6 +31,12 @@ namespace Application.Helpers
 
             CreateMap<Genre, Genre>();
             CreateMap<Genre, GenreDto>();
+
+            CreateMap<Comment, Comment>();
+            CreateMap<Comment, CommentDto>();
+
+            CreateMap<ApplicationUser, ApplicationUser>();
+            CreateMap<ApplicationUser, UserDto>();
         }
     }
 }
