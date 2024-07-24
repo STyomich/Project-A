@@ -40,6 +40,9 @@ namespace Application.Helpers
 
             CreateMap<Chronology, Chronology>();
             CreateMap<Chronology, ChronologyDto>();
+
+            CreateMap<ChronologyElement, ChronologyElement>();
+            CreateMap<ChronologyElement, ChronologyElementDto>();
         }
     }
 }
