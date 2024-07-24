@@ -37,6 +37,9 @@ namespace Application.Helpers
 
             CreateMap<ApplicationUser, ApplicationUser>();
             CreateMap<ApplicationUser, UserDto>();
+
+            CreateMap<Chronology, Chronology>();
+            CreateMap<Chronology, ChronologyDto>();
         }
     }
 }
