@@ -5,7 +5,7 @@ using Infrastructure.DbContext;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Services.AnimeService.AnimePinService
+namespace Application.Services.AnimePinService
 {
     public class AnimePinToUser
     {

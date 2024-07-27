@@ -1,5 +1,4 @@
 using Application.Services.AnimeService;
-using Application.Services.AnimeService.AnimePinService;
 using Core.Domain.Entities;
 using Core.DTO.Entities;
 using MediatR;
@@ -34,11 +33,6 @@ namespace API.Controllers
         {
             anime.Id = id;
             return HandleResult(await Mediator.Send(new Edit.Command { Anime = anime }));
-        }
-        [HttpPost("pin-anime-to-user")]
-        public async Task<IActionResult> PinAnimeToUser(AnimePin animePin)
-        {
-            return HandleResult(await Mediator.Send(new AnimePinToUser.Command { AnimePin = animePin }));
         }
 
     }

@@ -45,6 +45,7 @@ namespace Application.Helpers
             CreateMap<ChronologyElement, ChronologyElementDto>();
 
             CreateMap<AnimePin, AnimePin>();
+            CreateMap<AnimePin, AnimePinDto>();
         }
     }
 }
