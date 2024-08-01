@@ -27,6 +27,11 @@ namespace API.Extensions
                 cfg.RegisterServicesFromAssembly(typeof(List).Assembly);
             });
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddCors(options =>{
+                options.AddPolicy("CorsPolicy", policy =>{
+                    policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000", "https://localhost:3000");
+                });
+            });
             services.AddControllers(opt => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
