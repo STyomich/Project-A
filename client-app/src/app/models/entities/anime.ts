@@ -3,7 +3,7 @@ import { Genre } from "./genre"
 import { Studio } from "./studio"
 import { Comment } from "./comment"
 
-export interface Root {
+export interface Anime {
     id: string
     studioId: string
     picture: string
