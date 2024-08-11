@@ -1,31 +1,28 @@
-import { Button, Container, Dropdown, Menu, Image } from "semantic-ui-react";
+import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function NavBar() {
+  const { t } = useTranslation();
+  
 
-
-
-    return (
-        <Menu inverted fixed='top'>
-            <Container>
-                <Menu.Item to='/' header>
-                    <img src="src/assets/logo.png" alt="logo" style={{marginRight: '10px'}} />
-                    Reactivities
-                </Menu.Item>
-                <Menu.Item  to='/activities' name='Activities' />
-                <Menu.Item  to='/errors' name='Errors' />
-                <Menu.Item>
-                    <Button  to='/createActivity' positive content='Create Activity' />
-                </Menu.Item>
-                <Menu.Item position='right'>
-                    <Image  avatar spaced='right' />
-                    <Dropdown pointing='top left'>
-                        <Dropdown.Menu>
-                            <Dropdown.Item  text='My Profile' icon='user' />
-                            <Dropdown.Item  text='Logout' icon ='power' />
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Menu.Item>
-            </Container>
-        </Menu>
-    )
+  return (
+    <AppBar position="absolute" style={{ backgroundColor: "#0e1420" }}>
+      <Toolbar>
+        <IconButton size="large" edge="start" color="inherit" aria-label="logo">
+          <img src="src/assets/logo.png" width="35" height="35" alt="Logo" />
+        </IconButton>
+        <Typography variant="h6" component="div" style={{ fontWeight: "bold" }}>
+          {t("Project A")}
+        </Typography>
+        <Button variant="text" style={{ color: "white", marginLeft: "20px" }}>
+          List
+        </Button>
+        <Button variant="text" style={{ color: "white", marginLeft: "20px" }}>
+          Random
+        </Button>
+        <LanguageSwitcher />
+      </Toolbar>
+    </AppBar>
+  );
 }

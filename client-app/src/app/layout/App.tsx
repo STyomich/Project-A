@@ -1,10 +1,16 @@
+import { useStore } from "../stores/store";
 import NavBar from "./NavBar";
 
 function App() {
+  const { animeStore } = useStore();
+
 
   return (
-    <NavBar/>
-  )
+    <>
+      <NavBar/>
+      <h2>{animeStore.title}</h2>
+    </>
+  );
 }
 
-export default App
+export default App;
