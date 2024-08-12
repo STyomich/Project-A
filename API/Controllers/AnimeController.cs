@@ -39,5 +39,10 @@ namespace API.Controllers
         {
             return await _mediator.Send(new AnimesOfSeason.Query());
         }
+        [HttpGet("top-hundred")]
+        public async Task<ActionResult<List<AnimeDto>>> GetTopHundredAnimes()
+        {
+            return await _mediator.Send(new TopHundred.Query());
+        }
     }
 }

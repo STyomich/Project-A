@@ -21,9 +21,8 @@ export default function NavBar() {
             edge="start"
             color="inherit"
             aria-label="logo"
-            
           >
-            <img src="src/assets/logo.png" width="35" height="35" alt="Logo"  />
+            <img src="src/assets/logo.png" width="35" height="35" alt="Logo" />
 
             <Typography
               variant="h5"
@@ -44,6 +43,12 @@ export default function NavBar() {
             style={{ color: "white", fontWeight: "bold", marginLeft: "20px" }}
           >
             {t("Random anime")}
+          </Button>
+          <Button
+            variant="text"
+            style={{ color: "white", fontWeight: "bold", marginLeft: "20px" }}
+          >
+            {t("Top-100")}
           </Button>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
