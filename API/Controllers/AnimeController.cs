@@ -34,6 +34,10 @@ namespace API.Controllers
             anime.Id = id;
             return HandleResult(await Mediator.Send(new Edit.Command { Anime = anime }));
         }
-
+        [HttpGet("of-season")]
+        public async Task<ActionResult<List<AnimeDto>>> GetAnimeOfSeason()
+        {
+            return await _mediator.Send(new AnimesOfSeason.Query());
+        }
     }
 }
