@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Anime } from "../models/entities/anime";
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL as string;
+axios.defaults.baseURL = "http://localhost:5000/api";
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 

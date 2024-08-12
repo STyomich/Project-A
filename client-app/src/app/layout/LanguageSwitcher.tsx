@@ -20,6 +20,7 @@ const LanguageSelector = () => {
         onChange={handleChange}
         displayEmpty
         variant="outlined"
+        style ={{fontWeight:"bold"}}
         sx={{
           color: "white",
           '.MuiOutlinedInput-notchedOutline': {

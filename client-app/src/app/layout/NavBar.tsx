@@ -21,24 +21,32 @@ export default function NavBar() {
             edge="start"
             color="inherit"
             aria-label="logo"
+            
           >
-            <img src="src/assets/logo.png" width="35" height="35" alt="Logo" />
+            <img src="src/assets/logo.png" width="35" height="35" alt="Logo"  />
+
+            <Typography
+              variant="h5"
+              component="div"
+              style={{ fontWeight: "bold", justifyContent: "center" }}
+            >
+              {t("Project A")}
+            </Typography>
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            style={{ fontWeight: "bold", justifyContent:'center'}}
+          <Button
+            variant="text"
+            style={{ color: "white", fontWeight: "bold", marginLeft: "20px" }}
           >
-            {t("Project A")}
-          </Typography>
-          <Button variant="text" style={{ color: "white", marginLeft: "20px" }}>
-            List
+            {t("List")}
           </Button>
-          <Button variant="text" style={{ color: "white", marginLeft: "20px" }}>
-            Random
+          <Button
+            variant="text"
+            style={{ color: "white", fontWeight: "bold", marginLeft: "20px" }}
+          >
+            {t("Random anime")}
           </Button>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center"}}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <LanguageSwitcher />
         </Box>
       </Toolbar>
