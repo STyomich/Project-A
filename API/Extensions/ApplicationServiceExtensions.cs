@@ -2,6 +2,7 @@ using Application.Helpers;
 using Application.Interfaces;
 using Application.Services.AnimeService;
 using Infrastructure.DbContext;
+using Infrastructure.Images;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,8 @@ namespace API.Extensions
             });
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IImageAccessor, ImageAccessor>();
+            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
 
             return services;
         }
