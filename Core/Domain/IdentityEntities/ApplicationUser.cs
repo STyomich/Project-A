@@ -10,8 +10,7 @@ namespace Core.Domain.IdentityEntities
 {
     public class ApplicationUser : IdentityUser<Guid>
     {
-        public string? Picture { get; set; }
-        public string? Banner { get; set; }
+        public string? AvatarId { get; set; } // ImageId
         public string? UserNickname { get; set; }
         public string? UserSurname { get; set; }
         public string? Bio { get; set; }
@@ -25,5 +24,6 @@ namespace Core.Domain.IdentityEntities
         public ICollection<FriendRequest>? ReceivedFriendRequests { get; set; }
         public ICollection<Review>? Reviews { get; set; }
         public ICollection<EpisodePin>? EpisodePins { get; set; }
+        public Image? Avatar { get; set; }
     }
 }

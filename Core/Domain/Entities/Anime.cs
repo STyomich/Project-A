@@ -7,7 +7,7 @@ namespace Core.Domain.Entities
     {
         public Guid Id { get; set; }
         public Guid StudioId { get; set; }
-        public string? Picture { get; set; }
+        public string? PictureId { get; set; }
         public string? TitleInEnglish { get; set; }
         public string? TitleInJapanese { get; set; }
         public string? TitleInUkrainian { get; set; }
@@ -30,5 +30,6 @@ namespace Core.Domain.Entities
         public ICollection<Notification>? Notifications { get; set; }
         public ICollection<Review>? Reviews { get; set; }
         public ICollection<EpisodePin>? EpisodePins { get; set; }
+        public Image? Picture { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Core.Domain;
 using Core.Domain.Entities;
 using Core.Domain.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +37,7 @@ namespace Infrastructure.DbContext
         public DbSet<EpisodePin> EpisodePins { get; set; }
         public DbSet<VoiceCast> VoiceCasts { get; set; }
         public DbSet<VoiceCastPin> VoiceCastPins { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -168,8 +170,8 @@ namespace Infrastructure.DbContext
                 .WithMany(a => a.EpisodePins)
                 .HasForeignKey(ep => ep.AnimeId)
                 .OnDelete(DeleteBehavior.Cascade);
-            
-            builder.Entity<VoiceCastPin>(x => x.HasKey(vcp => new { vcp.EpisodeId, vcp.VoiceCastId}));
+
+            builder.Entity<VoiceCastPin>(x => x.HasKey(vcp => new { vcp.EpisodeId, vcp.VoiceCastId }));
             builder.Entity<VoiceCastPin>()
                 .HasOne(vcp => vcp.Episode)
                 .WithMany(e => e.VoiceCastPins)

@@ -1,11 +1,11 @@
+using Core.Domain;
 using Core.DTO.Entities;
 
 namespace Core.DTO.Identity
 {
     public class UserDto
     {
-        public string? Picture { get; set; }
-        public string? Banner { get; set; }
+        public Image? Avatar { get; set; }
         public string? UserNickname { get; set; }
         public string? UserName { get; set; }
         public string? UserSurname { get; set; }

@@ -31,7 +31,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userManager.Users.Include(u => u.UserSettings).SingleOrDefaultAsync(x => x.Email == loginDto.Email);
+            var user = await _userManager.Users.Include(u => u.UserSettings).Include(u => u.Avatar).SingleOrDefaultAsync(x => x.Email == loginDto.Email);
             if (user == null) return Unauthorized();
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
@@ -40,8 +40,7 @@ namespace API.Controllers
             {
                 return new UserDto
                 {
-                    Picture = user.Picture,
-                    Banner = user.Banner,
+                    Avatar = user.Avatar,
                     UserNickname = user.UserNickname,
                     UserName = user.UserName,
                     UserSurname = user.UserSurname,
@@ -82,15 +81,14 @@ namespace API.Controllers
             {
                 //TODO: Do functionality of creating User Settings.
                 var userSetting = new UserSetting
-                {
+                {   
                     UserId = user.Id
                 };
                 await _mediator.Send(new Create.Command { UserSetting = userSetting });
                 user.UserSettings = userSetting;
                 return new UserDto
                 {
-                    Picture = user.Picture,
-                    Banner = user.Banner,
+                    Avatar = user.Avatar,
                     UserNickname = user.UserNickname,
                     UserName = user.UserName,
                     UserSurname = user.UserSurname,
