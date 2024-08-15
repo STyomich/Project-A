@@ -25,6 +25,7 @@ namespace Application.Services.AnimeService
                     .Include(a => a.Studio)
                     .Include(a => a.Episodes).ThenInclude(e => e.VoiceCastPins).ThenInclude(vcp => vcp.VoiceCast)
                     .Include(a => a.Comments).ThenInclude(c => c.User)
+                    .Include(a => a.Picture)
                     .ToListAsync();
                 return _mapper.Map<List<AnimeDto>>(animes);
             }

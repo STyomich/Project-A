@@ -10,5 +10,10 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(command));
         }
+        [HttpPost("add-anime-picture/{id}")]
+        public async Task<IActionResult> AddAnimePicture(Guid id, [FromForm] IFormFile picture)
+        {
+            return HandleResult(await Mediator.Send(new AddAnimePicture.Command{ File = picture, AnimeId = id}));
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Core.Domain;
 using Core.Domain.Entities;
 using Core.Enums;
 
@@ -7,7 +8,7 @@ namespace Core.DTO.Entities
     {
         public Guid Id { get; set; }
         public Guid StudioId { get; set; }
-        public string? Picture { get; set; }
+        public string? PictureId { get; set; }
         public string? TitleInEnglish { get; set; }
         public string? TitleInJapanese { get; set; }
         public string? TitleInUkrainian { get; set; }
@@ -22,6 +23,7 @@ namespace Core.DTO.Entities
         public string Description { get; set; } = "No information";
         public string? AdminsNote { get; set; }
         public StudioDto? Studio { get; set; }
+        public Image? Picture { get; set; }
         public ICollection<EpisodeDto>? Episodes { get; set; }
         public ICollection<GenreDto>? Genres { get; set; }
         public ICollection<CommentDto>? Comments { get; set; }
