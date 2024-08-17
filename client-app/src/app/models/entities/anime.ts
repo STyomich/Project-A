@@ -2,11 +2,12 @@ import { Episode } from "./episode"
 import { Genre } from "./genre"
 import { Studio } from "./studio"
 import { Comment } from "./comment"
+import { Picture } from "./picture"
 
 export interface Anime {
     id: string
     studioId: string
-    picture: string
+    picture: Picture
     titleInEnglish: string
     titleInJapanese: string
     titleInUkrainian: string
