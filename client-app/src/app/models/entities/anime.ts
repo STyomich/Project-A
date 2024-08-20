@@ -14,8 +14,8 @@ export interface Anime {
     titleInRussian: string
     type: string
     animeState: string
-    startDate: string
-    endDate: string
+    startDate: Date
+    endDate: Date
     releasedEpisodes: number
     expectedEpisodes: number
     originalSource: string
