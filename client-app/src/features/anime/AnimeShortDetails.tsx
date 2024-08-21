@@ -13,6 +13,7 @@ import "@fontsource/roboto/500.css"; // Medium weight
 import "@fontsource/roboto/700.css"; // Bold weight
 import { StarRate } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   anime: Anime;
@@ -65,7 +66,7 @@ export default function AnimeShortDetails({ anime }: Props) {
             <Typography variant="body2" color="text.secondary">
               {anime.titleInJapanese}
             </Typography>
-            <Typography variant="h6" component="div">
+            <Typography component={NavLink} to={`/anime/${anime.id}`} variant="h6">
               {anime.titleInEnglish}
             </Typography>
             <Typography variant="body2" color="text.secondary">

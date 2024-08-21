@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
   const { t } = useTranslation();
@@ -45,6 +46,7 @@ export default function NavBar() {
             {t("Random anime")}
           </Button>
           <Button
+            component={NavLink} to='/top-hundred-animes' // or as={NavLink}, but in this case use @ts-ignore
             variant="text"
             style={{ color: "white", fontWeight: "bold", marginLeft: "20px" }}
           >
