@@ -9,6 +9,7 @@ import {
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { NavLink } from "react-router-dom";
+import Logo from "./Logo";
 
 export default function NavBar() {
   const { t } = useTranslation();
@@ -23,7 +24,7 @@ export default function NavBar() {
             color="inherit"
             aria-label="logo"
           >
-            <img src="src/assets/logo.png" width="35" height="35" alt="Logo" />
+           <Logo />
 
             <Typography
               variant="h5"

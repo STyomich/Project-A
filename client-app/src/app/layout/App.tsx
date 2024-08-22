@@ -1,5 +1,4 @@
 import NavBar from "./NavBar";
-import { observer } from "mobx-react-lite";
 import { Outlet } from "react-router-dom";
 
 function App() {
@@ -13,4 +12,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default App

@@ -4,5 +4,20 @@
     "List": "Список",
     "Top-100": "Топ-100",
     "Top-100 Anime": "Топ-100 Аниме",
-    "Undefined": "Не определено"
+    "Undefined": "Не определено",
+    "Type": "Тип",
+    "Episodes": "Эпизоды",
+    "State": "Состояние",
+    "Genres": "Жанры",
+    "Original source": "Первоисточник",
+    "Season": "Сезон",
+    "Studio": "Студия",
+    "Released": "Вышел",
+    "Seinen": "Сэйнен",
+    "Manga": "Манга",
+    "Spring": "Весна",
+    "Summer": "Лето",
+    "Autumn": "Осень",
+    "Winter": "Зима",
+    "finished at": "завершено"
 }
