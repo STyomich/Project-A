@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Anime } from "../models/entities/anime";
+import { UserLoginValues, UserRegisterValues } from "../models/identity/user";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -22,8 +23,14 @@ const Animes = {
     delete: (id: string) => requests.del<void>(`/anime/${id}`)
 }
 
+const Account ={
+  login: (userLoginValues: UserLoginValues) => requests.post<UserLoginValues>("/user/login", userLoginValues),
+  register: (userRegisterValues: UserRegisterValues) => requests.post<UserRegisterValues>("/user/register", userRegisterValues)
+}
+
 const agent = {
-    Animes
+    Animes,
+    Account
 }
 
 export default agent;

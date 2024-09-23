@@ -1,6 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import { Anime } from "../../app/models/entities/anime";
 import { useTranslation } from "react-i18next";
+import CircleIcon from '@mui/icons-material/Circle';
+import { green } from "@mui/material/colors";
 
 interface Props {
   anime: Anime | undefined;
@@ -97,6 +99,10 @@ function AnimeInfo({ anime }: Props) {
           <Typography style={{ fontWeight: "bold" }}>{t("State")}</Typography>
         </Box>
         <Box sx={{ display: "flex" }}>
+          {anime.animeState === "Released" && 
+            <CircleIcon sx={{fontSize: 18}} htmlColor="#23de05"/>
+          }
+          
           <Typography>{t(anime.animeState)}</Typography>
         </Box>
       </Box>
