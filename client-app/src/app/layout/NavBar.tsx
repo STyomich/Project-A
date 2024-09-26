@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
+import ProfileButtonGroup from "./ProfileButtonGroup";
 
 export default function NavBar() {
   const { t } = useTranslation();
@@ -56,6 +57,7 @@ export default function NavBar() {
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <LanguageSwitcher />
+          <ProfileButtonGroup />
         </Box>
       </Toolbar>
     </AppBar>

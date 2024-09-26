@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Anime } from "../models/entities/anime";
-import { UserLoginValues, UserRegisterValues } from "../models/identity/user";
+import { User, UserLoginValues, UserRegisterValues } from "../models/identity/user";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -24,8 +24,8 @@ const Animes = {
 }
 
 const Account ={
-  login: (userLoginValues: UserLoginValues) => requests.post<UserLoginValues>("/user/login", userLoginValues),
-  register: (userRegisterValues: UserRegisterValues) => requests.post<UserRegisterValues>("/user/register", userRegisterValues)
+  login: (userLoginValues: UserLoginValues) => requests.post<User>("/user/login", userLoginValues),
+  register: (userRegisterValues: UserRegisterValues) => requests.post<User>("/user/register", userRegisterValues)
 }
 
 const agent = {
