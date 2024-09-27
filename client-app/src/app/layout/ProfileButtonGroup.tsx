@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useStore } from "../stores/store";
 import { Box, Button, Typography } from "@mui/material";
+import { observer } from "mobx-react-lite";
+import { NavLink } from "react-router-dom";
 
-export default function ProfileButtonGroup() {
+export default observer(function ProfileButtonGroup() {
   const { t } = useTranslation();
   const { userStore } = useStore();
   const { user } = userStore;
@@ -18,6 +20,7 @@ export default function ProfileButtonGroup() {
       {!user && (
         <>
           <Button
+          component={NavLink}
             sx={{
               backgroundColor: "white",
               color: "black",
@@ -26,6 +29,7 @@ export default function ProfileButtonGroup() {
                 color: "white", // change text color to white on hover
               },
             }}
+            to="/login"
           >
             {t("Login")}
           </Button>
@@ -34,4 +38,4 @@ export default function ProfileButtonGroup() {
       )}
     </Box>
   );
-}
+});

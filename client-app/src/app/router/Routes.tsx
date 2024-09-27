@@ -2,6 +2,7 @@ import { createBrowserRouter, RouteObject } from "react-router-dom";
 import App from "../layout/App";
 import TopHundredDashboard from "../../features/anime/TopHundredDashboard";
 import AnimeDetails from "../../features/anime/AnimeDetails";
+import LoginForm from "../identity/LoginForm";
 
 export const routes: RouteObject[] = [
   {
@@ -9,7 +10,8 @@ export const routes: RouteObject[] = [
     element: <App />,
     children: [
         {path: 'top-hundred-animes', element: <TopHundredDashboard />},
-        {path: 'anime/:id', element: <AnimeDetails />}
+        {path: 'anime/:id', element: <AnimeDetails />},
+        {path: 'login', element: <LoginForm />}
     ]
   },
 ];
