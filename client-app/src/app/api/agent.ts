@@ -1,10 +1,21 @@
 import axios, { AxiosResponse } from "axios";
 import { Anime } from "../models/entities/anime";
-import { User, UserLoginValues, UserRegisterValues } from "../models/identity/user";
+import {
+  User,
+  UserLoginValues,
+  UserRegisterValues,
+} from "../models/identity/user";
+import { store } from "../stores/store";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
+
+axios.interceptors.request.use((config) => {
+  const token = store.commonStore.token;
+  if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
@@ -16,21 +27,24 @@ const requests = {
 };
 
 const Animes = {
-    list: () => requests.get<Anime[]>('/anime'),
-    create: (anime: Anime) => requests.post<void>("/anime", anime),
-    details: (id: string) => requests.get<Anime>(`/anime/${id}`),
-    update: (anime: Anime) => requests.put<void>(`/anime/${anime.id}`, anime),
-    delete: (id: string) => requests.del<void>(`/anime/${id}`)
-}
+  list: () => requests.get<Anime[]>("/anime"),
+  create: (anime: Anime) => requests.post<void>("/anime", anime),
+  details: (id: string) => requests.get<Anime>(`/anime/${id}`),
+  update: (anime: Anime) => requests.put<void>(`/anime/${anime.id}`, anime),
+  delete: (id: string) => requests.del<void>(`/anime/${id}`),
+};
 
-const Account ={
-  login: (userLoginValues: UserLoginValues) => requests.post<User>("/user/login", userLoginValues),
-  register: (userRegisterValues: UserRegisterValues) => requests.post<User>("/user/register", userRegisterValues)
-}
+const Account = {
+  current: () => requests.get<User>("/user"),
+  login: (userLoginValues: UserLoginValues) =>
+    requests.post<User>("/user/login", userLoginValues),
+  register: (userRegisterValues: UserRegisterValues) =>
+    requests.post<User>("/user/register", userRegisterValues),
+};
 
 const agent = {
-    Animes,
-    Account
-}
+  Animes,
+  Account,
+};
 
 export default agent;

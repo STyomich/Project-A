@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Application.Services.UserService;
 using Application.Services.UserSettingService;
 using AutoMapper;
@@ -81,7 +82,7 @@ namespace API.Controllers
             {
                 //TODO: Do functionality of creating User Settings.
                 var userSetting = new UserSetting
-                {   
+                {
                     UserId = user.Id
                 };
                 await _mediator.Send(new Create.Command { UserSetting = userSetting });
@@ -101,6 +102,25 @@ namespace API.Controllers
             }
 
             return BadRequest(result.Errors);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var user = await _userManager.Users.Include(u => u.UserSettings).Include(u => u.Avatar).SingleOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
+
+            return new UserDto
+            {
+                Avatar = user.Avatar,
+                UserNickname = user.UserNickname,
+                UserName = user.UserName,
+                UserSurname = user.UserSurname,
+                Email = user.Email,
+                Bio = user.Bio,
+                Country = user.Country,
+                Token = _tokenService.CreateToken(user),
+                UserSettings = _mapper.Map<UserSettingDto>(user.UserSettings)
+            };
         }
     }
 }

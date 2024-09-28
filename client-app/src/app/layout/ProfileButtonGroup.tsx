@@ -10,17 +10,23 @@ export default observer(function ProfileButtonGroup() {
   const { user } = userStore;
 
   return (
-    <Box>
+    <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
       {user && (
         <>
-          <img src={user.avatar.url} alt="User Image" />
+          <img
+            src={user.avatar.url}
+            style={{ marginRight: "10px" }}
+            width="35"
+            height="35"
+            alt="User Image"
+          />
           <Typography>{user.userNickname}</Typography>
         </>
       )}
       {!user && (
         <>
           <Button
-          component={NavLink}
+            component={NavLink}
             sx={{
               backgroundColor: "white",
               color: "black",
