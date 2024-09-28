@@ -13,14 +13,24 @@ export default observer(function ProfileButtonGroup() {
     <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
       {user && (
         <>
-          <img
-            src={user.avatar.url}
-            style={{ marginRight: "10px" }}
-            width="35"
-            height="35"
-            alt="User Image"
-          />
-          <Typography>{user.userNickname}</Typography>
+          <Button
+            component={NavLink}
+            to={`/profile/${user.userNickname}`}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textTransform: "none",
+            }}
+          >
+            <img
+              src={user.avatar.url}
+              style={{ marginRight: "10px" }}
+              width="35"
+              height="35"
+              alt="User Image"
+            />
+            <Typography sx={{color:"white"}}>{user.userNickname}</Typography>
+          </Button>
         </>
       )}
       {!user && (

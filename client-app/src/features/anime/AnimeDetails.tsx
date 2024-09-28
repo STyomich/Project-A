@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { useStore } from "../../app/stores/store";
 import { useEffect } from "react";
 import { Box, Divider, Rating } from "@mui/material";
@@ -8,7 +7,6 @@ import AnimeTitle from "./AnimeTitle";
 import AnimeInfo from "./AnimeInfo";
 
 function AnimeDetails() {
-  const { t } = useTranslation();
   const { animeStore } = useStore();
   const { selectedAnime, loadAnime } = animeStore;
   const { id } = useParams();

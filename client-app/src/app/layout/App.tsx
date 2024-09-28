@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useStore } from "../stores/store";
 import NavBar from "./NavBar";
 import { Outlet } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 import { Typography } from "@mui/material";
 
 function App() {
@@ -15,9 +16,8 @@ function App() {
     }
   }, [commonStore, userStore]);
 
-  // if (!commonStore.appLoaded)
-  //   return <Typography>Loading</Typography>;
-
+  if (!commonStore.appLoaded)
+    return <Typography>Loading</Typography>;
 
   return (
     <>
@@ -27,4 +27,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

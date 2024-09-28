@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import { Anime } from "../../app/models/entities/anime";
 import { useTranslation } from "react-i18next";
 import CircleIcon from '@mui/icons-material/Circle';
-import { green } from "@mui/material/colors";
 
 interface Props {
   anime: Anime | undefined;
