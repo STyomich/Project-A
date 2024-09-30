@@ -28,7 +28,7 @@ export default function AnimeShortDetails({ anime }: Props) {
         badgeContent={
           <Box sx={{ display: "flex", alignItems: "center", gap: "4px" }}>
             <StarRate sx={{ fontSize: "1.5rem" }} />
-            {'Вова пидорас'}
+            {'9'}
           </Box>
         }
         color="primary"

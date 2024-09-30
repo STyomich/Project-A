@@ -28,7 +28,7 @@ namespace Application.Tests.Services.AnimeService
             var anime = new Anime
             {
                 StudioId = Guid.NewGuid(),
-                Picture = "pictureLink",
+                PictureId = Guid.NewGuid().ToString(),
                 TitleInEnglish = null,
                 TitleInJapanese = null,
                 TitleInUkrainian = null,
@@ -65,7 +65,7 @@ namespace Application.Tests.Services.AnimeService
             var anime = new Anime
             {
                 StudioId = Guid.NewGuid(),
-                Picture = "pictureLink",
+                PictureId = Guid.NewGuid().ToString(),
                 TitleInEnglish = "Title in English",
                 TitleInJapanese = "Title in Japanese",
                 TitleInUkrainian = "Title in Ukrainian",
@@ -102,7 +102,7 @@ namespace Application.Tests.Services.AnimeService
             var anime = new Anime
             {
                 StudioId = Guid.NewGuid(),
-                Picture = "pictureLink",
+               PictureId = Guid.NewGuid().ToString(),
                 TitleInEnglish = "Title in English",
                 TitleInJapanese = "Title in Japanese",
                 TitleInUkrainian = "Title in Ukrainian",
@@ -139,7 +139,7 @@ namespace Application.Tests.Services.AnimeService
             var anime = new Anime
             {
                 StudioId = Guid.NewGuid(),
-                Picture = "pictureLink",
+                PictureId = Guid.NewGuid().ToString(),
                 TitleInEnglish = "Title in English",
                 TitleInJapanese = "Title in Japanese",
                 TitleInUkrainian = "Title in Ukrainian",
@@ -176,7 +176,7 @@ namespace Application.Tests.Services.AnimeService
             var anime = new Anime
             {
                 StudioId = Guid.NewGuid(),
-                Picture = "pictureLink",
+                PictureId = Guid.NewGuid().ToString(),
                 TitleInEnglish = "Title in English",
                 TitleInJapanese = "Title in Japanese",
                 TitleInUkrainian = "Title in Ukrainian",
