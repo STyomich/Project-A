@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import AnimeTitle from "./AnimeTitle";
 import AnimeInfo from "./AnimeInfo";
+import DropdownAddToList from "./DropdownAddToList";
 
 function AnimeDetails() {
   const { animeStore } = useStore();
@@ -40,6 +41,7 @@ function AnimeDetails() {
       >
         <Box>
           <img src={selectedAnime?.picture.url} style={{ height: "400px" }} />
+          <DropdownAddToList />
         </Box>
         <Box style={{ marginLeft: "20px" }} sx={{ width: "100%" }}>
           <Rating name="customized-10" max={10} size="large" />
@@ -49,8 +51,11 @@ function AnimeDetails() {
             variant="middle"
           />
           <AnimeInfo anime={selectedAnime!} />
+          
         </Box>
+        
       </Box>
+      
     </Box>
   );
 }
