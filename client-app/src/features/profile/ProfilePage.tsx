@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useStore } from "../../app/stores/store";
 import { observer } from "mobx-react-lite";
+import UsersAnimeList from "./UsersAnimeList";
 
 export default observer(function ProfilePage() {
   const { nickname } = useParams();
@@ -19,8 +20,7 @@ export default observer(function ProfilePage() {
     >
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "row",
+          display: "flow",
           alignItems: "left",
           backgroundColor: "white",
           padding: 2,
@@ -30,8 +30,9 @@ export default observer(function ProfilePage() {
           boxShadow: 3,
         }}
       >
+        {/* User information */}
         {user && (
-          <>
+          <Box sx={{display: "flex", flexDirection:"row"}}>
             <Box>
               <img
                 src={user.avatar.url}
@@ -42,7 +43,10 @@ export default observer(function ProfilePage() {
               />
             </Box>
             <Box>
-              <Typography style={{ fontWeight: "bold", marginBottom:"20px" }} variant="h3">
+              <Typography
+                style={{ fontWeight: "bold", marginBottom: "20px" }}
+                variant="h3"
+              >
                 {user.userNickname}
               </Typography>
               {user.userSettings.profileIsPublic ? (
@@ -124,8 +128,13 @@ export default observer(function ProfilePage() {
                 <Typography>Profile is private</Typography>
               )}
             </Box>
-          </>
+          </Box>
+          
         )}
+        {/* Users anime list */}
+        {user && 
+          <UsersAnimeList />
+        }
       </Box>
     </Box>
   );
