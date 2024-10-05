@@ -6,6 +6,7 @@ import {
   UserRegisterValues,
 } from "../models/identity/user";
 import { store } from "../stores/store";
+import { AnimePin } from "../models/entities/animePin";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -32,6 +33,7 @@ const Animes = {
   details: (id: string) => requests.get<Anime>(`/anime/${id}`),
   update: (anime: Anime) => requests.put<void>(`/anime/${anime.id}`, anime),
   delete: (id: string) => requests.del<void>(`/anime/${id}`),
+  pinAnimeToUser: (pin: AnimePin) => requests.post<void>("/pin-anime-to-user", pin)
 };
 
 const Account = {

@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { Anime } from "../models/entities/anime";
 import agent from "../api/agent";
+import { AnimePin } from "../models/entities/animePin";
 
 export default class AnimeStore {
   animes: Anime[] = [];
@@ -36,6 +37,17 @@ export default class AnimeStore {
       runInAction(() => {
         this.selectedAnime = anime;
       });
+      this.loading = false;
+    } catch (error) {
+      console.log(error);
+      this.loading = false;
+    }
+  };
+
+  pinAnimeToUser = async (pin: AnimePin) => {
+    this.loading = true;
+    try {
+      await agent.Animes.pinAnimeToUser(pin);
       this.loading = false;
     } catch (error) {
       console.log(error);

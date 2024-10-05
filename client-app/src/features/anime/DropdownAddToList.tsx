@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
+import { AnimePin } from "../../app/models/entities/animePin";
+import { useStore } from "../../app/stores/store";
 
 const DropdownAddToList: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [menuWidth, setMenuWidth] = useState<number | undefined>(undefined); // State to store button width
+  const { animeStore} = useStore();
+  const {selectedAnime} = animeStore;
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -13,6 +17,20 @@ const DropdownAddToList: React.FC = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const postAnimePin = async (pinType: string, grade: number) => {
+    const animePin: AnimePin = {
+      animeId: selectedAnime!.id,
+      pinType: pinType,
+      grade: grade,
+      isFavorite: false
+    };
+    animeStore.pinAnimeToUser(animePin);
+  }
+  const handleMenuItemClick = async (pinType: string) => {
+    await postAnimePin(pinType, 1); // TODO: Handle a grading anime by user, now grades doesn't works.
+    handleClose();
   };
 
   return (
@@ -45,10 +63,10 @@ const DropdownAddToList: React.FC = () => {
             },
           }}
       >
-        <MenuItem onClick={handleClose}>Watching</MenuItem>
-        <MenuItem onClick={handleClose}>Will Watch</MenuItem>
-        <MenuItem onClick={handleClose}>Watched</MenuItem>
-        <MenuItem onClick={handleClose}>Abandoned</MenuItem>
+        <MenuItem onClick={()=> handleMenuItemClick("Watching")}>Watching</MenuItem>
+        <MenuItem onClick={()=> handleMenuItemClick("Will Watch")}>Will Watch</MenuItem>
+        <MenuItem onClick={()=> handleMenuItemClick("Watched")}>Watched</MenuItem>
+        <MenuItem onClick={()=> handleMenuItemClick("Abandoned")}>Abandoned</MenuItem>
       </Menu>
     </div>
   );

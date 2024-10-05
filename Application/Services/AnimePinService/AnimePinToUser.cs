@@ -34,8 +34,12 @@ namespace Application.Services.AnimePinService
                 var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.UserNickname == _userAccessor.GetUserNickname());
                 request.AnimePin.UserId = user.Id;
                 var animePin = await _dataContext.AnimePins.FirstOrDefaultAsync(ap => ap.AnimeId == request.AnimePin.AnimeId && ap.UserId == request.AnimePin.UserId);
+
+                request.AnimePin.AddDate = DateTime.UtcNow;
                 if (animePin == null)
+                {
                     await _dataContext.AnimePins.AddAsync(request.AnimePin);
+                }
                 else
                 {
                     _mapper.Map(request.AnimePin, animePin);
