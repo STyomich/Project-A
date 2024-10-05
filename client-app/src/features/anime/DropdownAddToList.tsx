@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { AnimePin } from "../../app/models/entities/animePin";
+import { AnimePin, AnimePinCreateValues } from "../../app/models/entities/animePin";
 import { useStore } from "../../app/stores/store";
+import { observer } from "mobx-react-lite";
 
 const DropdownAddToList: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -20,13 +21,13 @@ const DropdownAddToList: React.FC = () => {
   };
 
   const postAnimePin = async (pinType: string, grade: number) => {
-    const animePin: AnimePin = {
+    const animePin: AnimePinCreateValues = {
       animeId: selectedAnime!.id,
       pinType: pinType,
       grade: grade,
       isFavorite: false
     };
-    animeStore.pinAnimeToUser(animePin);
+    await animeStore.pinAnimeToUser(animePin);
   }
   const handleMenuItemClick = async (pinType: string) => {
     await postAnimePin(pinType, 1); // TODO: Handle a grading anime by user, now grades doesn't works.
@@ -72,4 +73,4 @@ const DropdownAddToList: React.FC = () => {
   );
 };
 
-export default DropdownAddToList;
+export default observer( DropdownAddToList);

@@ -3,11 +3,22 @@ import { useParams } from "react-router-dom";
 import { useStore } from "../../app/stores/store";
 import { observer } from "mobx-react-lite";
 import UsersAnimeList from "./UsersAnimeList";
+import { useEffect } from "react";
 
 export default observer(function ProfilePage() {
   const { nickname } = useParams();
-  const { userStore } = useStore();
+  const { userStore, animeStore } = useStore();
   const { user } = userStore;
+  const { usersAnimes, loadAnimeFromUserList } = animeStore;
+  useEffect(() => {
+    loadAnimeFromUserList(nickname!);
+    console.log("Loading anime for user:", nickname);
+  }, [loadAnimeFromUserList, nickname]);
+  
+  useEffect(() => {
+    console.log("User's Animes:", usersAnimes);
+  }, [usersAnimes]);
+  
   return (
     <Box
       sx={{
@@ -32,7 +43,7 @@ export default observer(function ProfilePage() {
       >
         {/* User information */}
         {user && (
-          <Box sx={{display: "flex", flexDirection:"row"}}>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Box>
               <img
                 src={user.avatar.url}
@@ -129,12 +140,9 @@ export default observer(function ProfilePage() {
               )}
             </Box>
           </Box>
-          
         )}
         {/* Users anime list */}
-        {user && 
-          <UsersAnimeList />
-        }
+        {user && <UsersAnimeList usersAnimes={usersAnimes} />}
       </Box>
     </Box>
   );
