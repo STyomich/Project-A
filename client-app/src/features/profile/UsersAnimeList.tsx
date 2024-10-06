@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { AnimePin } from "../../app/models/entities/animePin";
+import AnimeStripeShortDetails from "./AnimeStripeShortDetails";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -22,7 +23,6 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          {/* Change Typography to use div as the underlying component */}
           <Typography component="div">{children}</Typography>
         </Box>
       )}
@@ -38,7 +38,7 @@ function a11yProps(index: number) {
 }
 
 interface Props {
-  usersAnimes: AnimePin[]; // Accept an array of Anime as a prop
+  usersAnimes: AnimePin[];
 }
 
 const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
@@ -48,25 +48,100 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
     setValue(newValue);
   };
 
-  // Filter animes based on some criteria (e.g., watching, will watch, etc.)
-  const watchingAnimes = usersAnimes.filter(animePin => animePin.pinType === 'Watching');
-  const willWatchAnimes = usersAnimes.filter(animePin => animePin.pinType === 'Will Watch');
-  const watchedAnimes = usersAnimes.filter(animePin => animePin.pinType === 'Watched');
-  const abandonedAnimes = usersAnimes.filter(animePin => animePin.pinType === 'Abandoned');
+  const watchingAnimes = usersAnimes.filter(
+    (animePin) => animePin.pinType === "Watching"
+  );
+  const willWatchAnimes = usersAnimes.filter(
+    (animePin) => animePin.pinType === "Will Watch"
+  );
+  const watchedAnimes = usersAnimes.filter(
+    (animePin) => animePin.pinType === "Watched"
+  );
+  const abandonedAnimes = usersAnimes.filter(
+    (animePin) => animePin.pinType === "Abandoned"
+  );
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Tabs value={value} onChange={handleChange} aria-label="anime tabs">
-        <Tab label="Watching" {...a11yProps(0)} />
-        <Tab label="Will Watch" {...a11yProps(1)} />
-        <Tab label="Watched" {...a11yProps(2)} />
-        <Tab label="Abandoned" {...a11yProps(3)} />
+    <Box sx={{ width: "100%" }}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        aria-label="anime tabs"
+        sx={{
+          ".MuiTabs-flexContainer": {
+            backgroundColor: "#0e1420",
+          },
+          ".MuiTabs-indicator": {
+            backgroundColor: "white", // Change indicator color to white
+          },
+        }}
+      >
+        <Tab
+          label="Watching"
+          {...a11yProps(0)}
+          sx={{
+            color: "white",
+            "&.Mui-selected": {
+              color: "white", // Selected text color stays white
+              backgroundColor: "black", // Selected tab background remains black
+            },
+            "&:hover": {
+              color: "black",
+              backgroundColor: "white",
+            },
+          }}
+        />
+        <Tab
+          label="Will Watch"
+          {...a11yProps(1)}
+          sx={{
+            color: "white",
+            "&.Mui-selected": {
+              color: "white",
+              backgroundColor: "black",
+            },
+            "&:hover": {
+              color: "black",
+              backgroundColor: "white",
+            },
+          }}
+        />
+        <Tab
+          label="Watched"
+          {...a11yProps(2)}
+          sx={{
+            color: "white",
+            "&.Mui-selected": {
+              color: "white",
+              backgroundColor: "black",
+            },
+            "&:hover": {
+              color: "black",
+              backgroundColor: "white",
+            },
+          }}
+        />
+        <Tab
+          label="Abandoned"
+          {...a11yProps(3)}
+          sx={{
+            color: "white",
+            "&.Mui-selected": {
+              color: "white",
+              backgroundColor: "black",
+            },
+            "&:hover": {
+              color: "black",
+              backgroundColor: "white",
+            },
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
         {watchingAnimes.length ? (
-          watchingAnimes.map(animePin => (
-            <Typography key={animePin.anime.id} component="div">{animePin.anime.titleInEnglish}</Typography>
+          watchingAnimes.map((animePin) => (
+            <AnimeStripeShortDetails key={animePin.animeId} animePin={animePin} />
           ))
         ) : (
           <Typography component="div">No animes in Watching</Typography>
@@ -74,8 +149,8 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         {willWatchAnimes.length ? (
-          willWatchAnimes.map(animePin => (
-            <Typography key={animePin.anime.id} component="div">{animePin.anime.titleInEnglish}</Typography>
+          willWatchAnimes.map((animePin) => (
+            <AnimeStripeShortDetails key={animePin.animeId} animePin={animePin} />
           ))
         ) : (
           <Typography component="div">No animes in Will Watch</Typography>
@@ -83,8 +158,8 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         {watchedAnimes.length ? (
-          watchedAnimes.map(animePin => (
-            <Typography key={animePin.anime.id} component="div">{animePin.anime.titleInEnglish}</Typography>
+          watchedAnimes.map((animePin) => (
+            <AnimeStripeShortDetails key={animePin.animeId} animePin={animePin} />
           ))
         ) : (
           <Typography component="div">No animes in Watched</Typography>
@@ -92,8 +167,8 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
       </TabPanel>
       <TabPanel value={value} index={3}>
         {abandonedAnimes.length ? (
-          abandonedAnimes.map(animePin => (
-            <Typography key={animePin.anime.id} component="div">{animePin.anime.titleInEnglish}</Typography>
+          abandonedAnimes.map((animePin) => (
+            <AnimeStripeShortDetails key={animePin.animeId} animePin={animePin} />
           ))
         ) : (
           <Typography component="div">No animes in Abandoned</Typography>

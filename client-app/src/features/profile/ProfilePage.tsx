@@ -43,7 +43,7 @@ export default observer(function ProfilePage() {
       >
         {/* User information */}
         {user && (
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Box sx={{ display: "flex", flexDirection: "row", marginBottom:"20px" }}>
             <Box>
               <img
                 src={user.avatar.url}
