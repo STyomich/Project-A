@@ -3,6 +3,7 @@ import { Tabs, Tab, Box, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { AnimePin } from "../../app/models/entities/animePin";
 import AnimeStripeShortDetails from "./AnimeStripeShortDetails";
+import { useTranslation } from "react-i18next";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -43,6 +44,7 @@ interface Props {
 
 const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
   const [value, setValue] = useState(0);
+  const { t } = useTranslation();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -77,7 +79,7 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
         }}
       >
         <Tab
-          label="Watching"
+          label={t("Watching")}
           {...a11yProps(0)}
           sx={{
             color: "white",
@@ -92,7 +94,7 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
           }}
         />
         <Tab
-          label="Will Watch"
+          label={t("Will Watch")}
           {...a11yProps(1)}
           sx={{
             color: "white",
@@ -107,7 +109,7 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
           }}
         />
         <Tab
-          label="Watched"
+          label={t("Watched")}
           {...a11yProps(2)}
           sx={{
             color: "white",
@@ -122,7 +124,7 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
           }}
         />
         <Tab
-          label="Abandoned"
+          label={t("Abandoned")}
           {...a11yProps(3)}
           sx={{
             color: "white",
@@ -141,7 +143,10 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
       <TabPanel value={value} index={0}>
         {watchingAnimes.length ? (
           watchingAnimes.map((animePin) => (
-            <AnimeStripeShortDetails key={animePin.animeId} animePin={animePin} />
+            <AnimeStripeShortDetails
+              key={animePin.animeId}
+              animePin={animePin}
+            />
           ))
         ) : (
           <Typography component="div">No animes in Watching</Typography>
@@ -150,7 +155,10 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
       <TabPanel value={value} index={1}>
         {willWatchAnimes.length ? (
           willWatchAnimes.map((animePin) => (
-            <AnimeStripeShortDetails key={animePin.animeId} animePin={animePin} />
+            <AnimeStripeShortDetails
+              key={animePin.animeId}
+              animePin={animePin}
+            />
           ))
         ) : (
           <Typography component="div">No animes in Will Watch</Typography>
@@ -159,7 +167,10 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
       <TabPanel value={value} index={2}>
         {watchedAnimes.length ? (
           watchedAnimes.map((animePin) => (
-            <AnimeStripeShortDetails key={animePin.animeId} animePin={animePin} />
+            <AnimeStripeShortDetails
+              key={animePin.animeId}
+              animePin={animePin}
+            />
           ))
         ) : (
           <Typography component="div">No animes in Watched</Typography>
@@ -168,7 +179,10 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
       <TabPanel value={value} index={3}>
         {abandonedAnimes.length ? (
           abandonedAnimes.map((animePin) => (
-            <AnimeStripeShortDetails key={animePin.animeId} animePin={animePin} />
+            <AnimeStripeShortDetails
+              key={animePin.animeId}
+              animePin={animePin}
+            />
           ))
         ) : (
           <Typography component="div">No animes in Abandoned</Typography>
