@@ -138,6 +138,21 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
             },
           }}
         />
+        <Tab
+          label={t("Favorites")}
+          {...a11yProps(3)}
+          sx={{
+            color: "white",
+            "&.Mui-selected": {
+              color: "white",
+              backgroundColor: "black",
+            },
+            "&:hover": {
+              color: "black",
+              backgroundColor: "white",
+            },
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -149,7 +164,7 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
             />
           ))
         ) : (
-          <Typography component="div">No animes in Watching</Typography>
+          <Typography component="div">{t("No animes in Watching list")}</Typography>
         )}
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -161,7 +176,7 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
             />
           ))
         ) : (
-          <Typography component="div">No animes in Will Watch</Typography>
+          <Typography component="div">{t("No animes in Will Watch list")}</Typography>
         )}
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -173,7 +188,7 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
             />
           ))
         ) : (
-          <Typography component="div">No animes in Watched</Typography>
+          <Typography component="div">{t("No animes in Watched list")}</Typography>
         )}
       </TabPanel>
       <TabPanel value={value} index={3}>
@@ -185,7 +200,19 @@ const UsersAnimeList: React.FC<Props> = ({ usersAnimes }) => {
             />
           ))
         ) : (
-          <Typography component="div">No animes in Abandoned</Typography>
+          <Typography component="div">{t("No animes in Abandoned list")}</Typography>
+        )}
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        {abandonedAnimes.length ? (
+          abandonedAnimes.map((animePin) => (
+            <AnimeStripeShortDetails
+              key={animePin.animeId}
+              animePin={animePin}
+            />
+          ))
+        ) : (
+          <Typography component="div">{t("No animes in Favorites list")}</Typography>
         )}
       </TabPanel>
     </Box>

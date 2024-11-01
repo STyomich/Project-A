@@ -33,6 +33,7 @@ namespace Application.Services.AnimePinService
                     return Result<Unit>.Failure("Can't identify pin type.");
                 var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.UserNickname == _userAccessor.GetUserNickname());
                 request.AnimePin.UserId = user.Id;
+                request.AnimePin.User = user;
                 var animePin = await _dataContext.AnimePins.FirstOrDefaultAsync(ap => ap.AnimeId == request.AnimePin.AnimeId && ap.UserId == request.AnimePin.UserId);
 
                 request.AnimePin.AddDate = DateTime.UtcNow;
@@ -42,7 +43,11 @@ namespace Application.Services.AnimePinService
                 }
                 else
                 {
-                    _mapper.Map(request.AnimePin, animePin);
+                    // _mapper.Map(request.AnimePin, animePin);
+                    animePin.PinType = request.AnimePin.PinType;
+                    animePin.AddDate = DateTime.UtcNow;
+                    animePin.isFavorite = request.AnimePin.isFavorite;
+                    animePin.Grade = request.AnimePin.Grade;
                 }
                 var result = await _dataContext.SaveChangesAsync() > 0;
                 if (!result)

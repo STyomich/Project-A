@@ -26,5 +26,11 @@
     "Will Watch": "Буду Смотреть",
     "Watched": "Просмотрено",
     "Abandoned": "Брошено",
-    "Favorites": "Любимое"
+    "Favorites": "Любимое",
+    "No animes in Watching list": "Нет аниме в списке просмотренного",
+    "No animes in Will Watch list": "Нет аниме в списке будущего просмотра",
+    "No animes in Watched list": "Нет аниме в списке просмотренных",
+    "No animes in Abandoned list": "Нет аниме в списке брошенных",
+    "No animes in Favorites list": "Нет аниме в списке любимых",
+    "Anime successfully moved to another list": "Аниме успешно было перемещено в другой список"
 }

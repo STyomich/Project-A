@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { AnimePin, AnimePinCreateValues } from "../../app/models/entities/animePin";
+import {  AnimePinCreateValues } from "../../app/models/entities/animePin";
 import { useStore } from "../../app/stores/store";
 import { observer } from "mobx-react-lite";
 

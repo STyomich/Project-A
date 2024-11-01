@@ -26,5 +26,11 @@
     "Will Watch": "Буду Дивитись",
     "Watched": "Переглянуто",
     "Abandoned": "Кинуто",
-    "Favorites": "Улюблене"
+    "Favorites": "Улюблене",
+    "No animes in Watching list": "Немає аніме у списку перегляду",
+    "No animes in Will Watch list": "Немає аніме у списку майбутнього перегляду",
+    "No animes in Watched list": "Немає аніме у списку переглянутих",
+    "No animes in Abandoned list": "Немає аніме у списку кинутих",
+    "No animes in Favorites list": "Немає аніме у списку улюблених",
+    "Anime successfully moved to another list": "Аніме успішно переміщено до іншого списку"
 }

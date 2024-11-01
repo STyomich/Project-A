@@ -1,8 +1,13 @@
 import { Box, Button, Typography, IconButton } from "@mui/material";
 import { FavoriteBorder, StarRate, VisibilityOff } from "@mui/icons-material";
-import { AnimePin } from "../../app/models/entities/animePin";
+import {
+  AnimePin,
+  AnimePinCreateValues,
+} from "../../app/models/entities/animePin";
 import { useTranslation } from "react-i18next";
 import CircleIcon from "@mui/icons-material/Circle";
+import { useStore } from "../../app/stores/store";
+import { toast } from "react-toastify";
 
 interface Props {
   animePin: AnimePin;
@@ -10,6 +15,7 @@ interface Props {
 
 export default function AnimeStripeShortDetails({ animePin }: Props) {
   const { i18n, t } = useTranslation();
+  const { animeStore } = useStore();
 
   const getTitleByLanguage = () => {
     switch (i18n.language) {
@@ -46,6 +52,36 @@ export default function AnimeStripeShortDetails({ animePin }: Props) {
           </Box>
         ); // Fallback to English if no match
     }
+  };
+
+  const postAddAnimeToAnotherList = async (
+    pinType: string,
+    selectedAnimePin: AnimePin
+  ) => {
+    const animePin: AnimePinCreateValues = {
+      animeId: selectedAnimePin!.anime.id,
+      pinType: pinType,
+      grade: selectedAnimePin.grade,
+      isFavorite: selectedAnimePin.isFavorite,
+    };
+    await animeStore.pinAnimeToUser(animePin);
+  };
+  const handleAddToAnotherList = async (
+    pinType: string,
+    selectedAnimePin: AnimePin
+  ) => {
+    await postAddAnimeToAnotherList(pinType, selectedAnimePin).finally(() => {
+      animePin.pinType = pinType;
+      toast.success(t("Anime successfully moved to another list"), {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }); // TODO: Handle a grading anime by user, now grades doesn't works.
   };
 
   return (
@@ -98,13 +134,18 @@ export default function AnimeStripeShortDetails({ animePin }: Props) {
       <Box display="flex" gap={1}>
         <Button
           variant="outlined"
-          sx={{ backgroundColor: "black", color: "white","&:hover": {
+          sx={{
+            backgroundColor: "black",
+            color: "white",
+            "&:hover": {
               color: "black",
               backgroundColor: "white",
-              borderColor:"black"
-            }, }}
+              borderColor: "black",
+            },
+          }}
           onClick={() => {
             /* Add to Watched logic */
+            handleAddToAnotherList("Watched", animePin);
           }}
         >
           {t("Watched")}
@@ -117,7 +158,7 @@ export default function AnimeStripeShortDetails({ animePin }: Props) {
             "&:hover": {
               color: "black",
               backgroundColor: "white",
-              borderColor:"black"
+              borderColor: "black",
             },
           }}
           onClick={() => {
@@ -127,11 +168,15 @@ export default function AnimeStripeShortDetails({ animePin }: Props) {
           {t("Will Watch")}
         </Button>
         <IconButton
-          sx={{ backgroundColor: "black", color: "white","&:hover": {
+          sx={{
+            backgroundColor: "black",
+            color: "white",
+            "&:hover": {
               color: "black",
               backgroundColor: "white",
-              borderColor:"black"
-            }, }}
+              borderColor: "black",
+            },
+          }}
           onClick={() => {
             /* Add to Abandoned logic */
           }}
@@ -139,11 +184,15 @@ export default function AnimeStripeShortDetails({ animePin }: Props) {
           <VisibilityOff />
         </IconButton>
         <IconButton
-          sx={{ backgroundColor: "black", color: "white","&:hover": {
+          sx={{
+            backgroundColor: "black",
+            color: "white",
+            "&:hover": {
               color: "black",
               backgroundColor: "white",
-              borderColor:"black"
-            }, }}
+              borderColor: "black",
+            },
+          }}
           onClick={() => {
             /* Add to Favorites logic */
           }}
